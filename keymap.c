@@ -15,34 +15,63 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/* TODO
+
+- Change $ from hold to double tap
+- Convert - and = on NAV layer into proper Grow and Shrink buttons
+- Add + to a proper place in the Single Shot Layer 1 (move backtick to add the plus sign on the same spot as on the NUM layer)
+- Move - to L on the Single Shot Layer (L for List)
+
+*/
+
 #include QMK_KEYBOARD_H
 
 // COMBOS
 
 enum combos {
-  DF_LPRN,
-  JK_RPRN,
-  SD_LBRC,
-  KL_RBRC,
+  DF_CBO,
+  JK_CBO,
+  // SD_CBO,
+  // KL_CBO,
+  N45_CBO,
+  CV_CBO,
+  MCOM_CBO,
+  //ER_CBO,
+  //UI_CBO,
   COMBO_LENGTH
 };
 
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
-const uint16_t PROGMEM df_combo[] = {LALT_T(KC_D), LGUI_T(KC_F), COMBO_END};
-const uint16_t PROGMEM jk_combo[] = {RGUI_T(KC_J), RALT_T(KC_K), COMBO_END};
-const uint16_t PROGMEM sd_combo[] = {LCTL_T(KC_S), LALT_T(KC_D), COMBO_END};
-const uint16_t PROGMEM kl_combo[] = {RALT_T(KC_K), RCTL_T(KC_L), COMBO_END};
+const uint16_t PROGMEM df_combo[]   = {LALT_T(KC_D), LGUI_T(KC_F), COMBO_END};
+const uint16_t PROGMEM jk_combo[]   = {RGUI_T(KC_J), RALT_T(KC_K), COMBO_END};
+// const uint16_t PROGMEM sd_combo[]   = {LCTL_T(KC_S), LALT_T(KC_D), COMBO_END};
+// const uint16_t PROGMEM kl_combo[]   = {RALT_T(KC_K), RCTL_T(KC_L), COMBO_END};
+const uint16_t PROGMEM n45_combo[]  = {KC_4, KC_5, COMBO_END};
+const uint16_t PROGMEM cv_combo[]   = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM mcom_combo[] = {KC_M, KC_COMMA, COMBO_END};
+// const uint16_t PROGMEM er_combo[]   = {KC_E, KC_R, COMBO_END};
+// const uint16_t PROGMEM ui_combo[]   = {KC_U, KC_I, COMBO_END};
 
 combo_t key_combos[] = {
-    // D+F = (
-    [DF_LPRN] = COMBO(df_combo, KC_LPRN),
-    // J+K = )
-    [JK_RPRN] = COMBO(jk_combo, KC_RPRN),
+    // D+F = TAB
+    [DF_CBO] = COMBO(df_combo, KC_TAB),
+    // J+K = ENTER
+    [JK_CBO] = COMBO(jk_combo, KC_ENT),
     // S+D = [
-    [SD_LBRC] = COMBO(sd_combo, KC_LBRC),
+    // [SD_CBO] = COMBO(sd_combo, KC_LBRC),
     // K+L = ]
-    [KL_RBRC] = COMBO(kl_combo, KC_RBRC)
+    // [KL_CBO] = COMBO(kl_combo, KC_RBRC),
+    // NUMPAD 4+5 = ENTER
+    [N45_CBO] = COMBO(n45_combo, KC_ENT),
+    // C + V = (
+    [CV_CBO] = COMBO(cv_combo, KC_LPRN),
+    // M + , = )
+    [MCOM_CBO] = COMBO(mcom_combo, KC_RPRN),
+    // E + R = ←
+    // [ER_CBO] = COMBO(er_combo, KC_LEFT),
+    // U + I = →
+    // [UI_CBO] = COMBO(ui_combo, KC_RIGHT)
 };
 
 // Tap Dance keycodes
@@ -52,7 +81,7 @@ enum td_keycodes {
     DASH_EM, // `—` (OPT-SHFT -) when held, `-` when pressed
     PI_PASTE, // `SHFT-OPT-CMD v` when held, | when pressed
     ESC_FRC, // `Force quit` when held, ESC when pressed
-    QU_LAYR
+    // QU_LAYR
 };
 
 typedef enum {
@@ -96,40 +125,42 @@ void pipaste_reset(qk_tap_dance_state_t *state, void *user_data);
 void escfrc_finished(qk_tap_dance_state_t *state, void *user_data);
 void escfrc_reset(qk_tap_dance_state_t *state, void *user_data);
 
-void ql_finished(qk_tap_dance_state_t *state, void *user_data);
-void ql_reset(qk_tap_dance_state_t *state, void *user_data);
+// void ql_finished(qk_tap_dance_state_t *state, void *user_data);
+// void ql_reset(qk_tap_dance_state_t *state, void *user_data);
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [0] = LAYOUT_split_3x5_3(
   KC_Q,             KC_W,           KC_E,           KC_R,           KC_T,               KC_Y,           KC_U,           KC_I,           KC_O,           KC_BSPC,
-  LSFT_T(KC_A),     LCTL_T(KC_S),   LALT_T(KC_D),   LGUI_T(KC_F),   ALL_T(KC_G),        ALL_T(KC_H),    RGUI_T(KC_J),   RALT_T(KC_K),   RCTL_T(KC_L),   RSFT_T(KC_P),
+  LSFT_T(KC_A),     LCTL_T(KC_S),   LALT_T(KC_D),   LGUI_T(KC_F),   KC_G,               KC_H,           RGUI_T(KC_J),   RALT_T(KC_K),   RCTL_T(KC_L),   RSFT_T(KC_P),
   KC_Z,             KC_X,           KC_C,           KC_V,           KC_B,               KC_N,           KC_M,           KC_COMM,        TD(DOT_EL),     KC_SLSH,
-                                    MEH(KC_NO),     KC_SPC,         KC_TAB,             KC_ENT,         OSL(1),         TD(QU_LAYR)
+                                    MEH(KC_NO),     KC_SPC,         OSM(MOD_HYPR),      OSL(1),         TT(2),          TT(3)
 ),
 
 // ONE SHOTS
 [1] = LAYOUT_split_3x5_3(
-  KC_ESC,           KC_HASH,        TD(EUR_DOL),    KC_UNDS,        KC_DQUO,            KC_QUOT,        KC_LCBR,        KC_RCBR,        KC_TILD,        KC_TRNS,
-  KC_TRNS,          KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,            KC_GRV,         KC_LPRN,        KC_RPRN,        KC_COLN,        KC_EXLM,
-  LALT(KC_BSLS),    LSA(KC_BSLS),   LALT(KC_8),     TD(PI_PASTE),   KC_AMPR,            KC_SCLN,        KC_LBRC,        KC_RBRC,        KC_CIRC,        KC_BSLS,
-                                    MEH(KC_NO),     TD(DASH_EM),    KC_TRNS,            KC_TRNS,        KC_TRNS,        KC_TRNS
+  KC_ESC,           KC_HASH,        TD(EUR_DOL),    KC_UNDS,        KC_DQUO,            KC_QUOT,        KC_NO,          KC_NO,        KC_TILD,        KC_BSPC,
+  KC_LSFT,          KC_LCTL,        KC_LOPT,        KC_LCMD,        TD(DASH_EM),        KC_GRV,         KC_EXLM,        KC_COLN,      KC_NO,          KC_NO,
+  LALT(KC_BSLS),    LSA(KC_BSLS),   LALT(KC_8),     TD(PI_PASTE),   KC_AMPR,            KC_SCLN,        KC_LBRC,        KC_RBRC,      KC_CIRC,        KC_BSLS,
+                                    MEH(KC_NO),     KC_SPC,         OSM(MOD_HYPR),      OSL(1),         TT(2),          TT(3)
 ),
 
 // NAVIGATION
 [2] = LAYOUT_split_3x5_3(
-  KC_TRNS,          KC_BRID,        KC_BRIU,        LGUI(KC_GRV),   LCTL(KC_TAB),       KC_PGUP,        LGUI(KC_LBRC),  KC_UP,          LGUI(KC_RBRC),  KC_TRNS,
-  KC_TRNS,          KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,            KC_PGDN,        KC_LEFT,        KC_DOWN,        KC_RGHT,        KC_NO,
-  KC_TRNS,          KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,            KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,
-                                    TO(0),          KC_SPC,         KC_TRNS,            KC_TRNS,        KC_TRNS,        TT(3)
+  KC_ESC,           KC_BRID,        KC_BRIU,        LGUI(KC_GRV),   LCTL(KC_TAB),       KC_PGUP,        LGUI(KC_LBRC),  KC_UP,          LGUI(KC_RBRC),  KC_BSPC,
+  KC_LSFT,          KC_LCTL,        KC_LOPT,        KC_LCMD,        KC_NO,              KC_PGDN,        KC_LEFT,        KC_DOWN,        KC_RGHT,        KC_NO,
+  KC_NO,            KC_NO,          KC_NO,          KC_NO,          KC_NO,              KC_NO,          KC_MINUS,       KC_EQL,         KC_NO,          KC_NO,
+                                    TO(0),          KC_SPC,         OSM(MOD_HYPR),      OSL(1),         TT(2),          TT(3)
 ),
 
 // NUMPAD
 [3] = LAYOUT_split_3x5_3(
-  TD(ESC_FRC),      KC_NO,          KC_NO,          KC_NO,          KC_PERC,            KC_PMNS,        KC_7,           KC_8,           KC_9,           KC_TRNS,
-  KC_TRNS,          KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_COLN,            KC_PPLS,        KC_4,           KC_5,           KC_6,           KC_COMM,
+  // COMBO's:
+  // 4 + 5 = Enter
+  TD(ESC_FRC),      KC_DEL,         KC_NO,          KC_PERC,        KC_TAB,             KC_PMNS,        KC_7,           KC_8,           KC_9,           KC_BSPC,
+  KC_LSFT,          KC_LCTL,        KC_LOPT,        KC_LCMD,        KC_COLN,            KC_PPLS,        KC_4,           KC_5,           KC_6,           KC_COMM,
   KC_NO,            KC_NO,          KC_PSLS,        KC_ASTR,        KC_PEQL,            KC_0,           KC_1,           KC_2,           KC_3,           KC_DOT,
-                                    TO(0),          KC_TRNS,        KC_TRNS,            KC_TRNS,        KC_TRNS,        KC_NO
+                                    TO(0),          KC_SPC,         OSM(MOD_HYPR),      OSL(1),         TT(2),          TT(3)
 )
 
 };
@@ -342,42 +373,43 @@ void escfrc_reset(qk_tap_dance_state_t *state, void *user_data) {
 // --- QUANTUM LAYER
 
 // Initialize tap structure associated with example tap dance key
-static td_tap_t ql_tap_state = {
-    .is_press_action = true,
-    .state = TD_NONE
-};
 
-void ql_finished(qk_tap_dance_state_t *state, void *user_data) {
-    ql_tap_state.state = cur_dance(state);
-    switch (ql_tap_state.state) {
-        case TD_SINGLE_TAP:
-            layer_on(2);
-            break;
-        case TD_SINGLE_HOLD:
-            layer_on(2);
-            break;
-        case TD_DOUBLE_TAP:
-            // Check to see if the layer is already set
-            if (layer_state_is(3)) {
-                // If already set, then switch it off
-                layer_off(3);
-            } else {
-                // If not already set, then switch the layer on
-                layer_on(3);
-            }
-            break;
-        default:
-            break;
-    }
-}
-
-void ql_reset(qk_tap_dance_state_t *state, void *user_data) {
-    // If the key was held down and now is released then switch off the layer
-    if (ql_tap_state.state == TD_SINGLE_HOLD) {
-        layer_off(2);
-    }
-    ql_tap_state.state = TD_NONE;
-}
+// static td_tap_t ql_tap_state = {
+//     .is_press_action = true,
+//     .state = TD_NONE
+// };
+//
+// void ql_finished(qk_tap_dance_state_t *state, void *user_data) {
+//     ql_tap_state.state = cur_dance(state);
+//     switch (ql_tap_state.state) {
+//         case TD_SINGLE_TAP:
+//             layer_on(2);
+//             break;
+//         case TD_SINGLE_HOLD:
+//             layer_on(2);
+//             break;
+//         case TD_DOUBLE_TAP:
+//             // Check to see if the layer is already set
+//             if (layer_state_is(3)) {
+//                 // If already set, then switch it off
+//                 layer_off(3);
+//             } else {
+//                 // If not already set, then switch the layer on
+//                 layer_on(3);
+//             }
+//             break;
+//         default:
+//             break;
+//     }
+// }
+//
+// void ql_reset(qk_tap_dance_state_t *state, void *user_data) {
+//     // If the key was held down and now is released then switch off the layer
+//     if (ql_tap_state.state == TD_SINGLE_HOLD) {
+//         layer_off(2);
+//     }
+//     ql_tap_state.state = TD_NONE;
+// }
 
 // ---
 
@@ -388,5 +420,5 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [DASH_EM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dashem_finished, dashem_reset),
     [PI_PASTE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, pipaste_finished, pipaste_reset),
     [ESC_FRC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, escfrc_finished, escfrc_reset),
-    [QU_LAYR] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ql_finished, ql_reset, 275)
+    // [QU_LAYR] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ql_finished, ql_reset, 275)
 };
