@@ -53,7 +53,7 @@
 
 
 
-// ###### Layer 1
+// ###### Layer 1 Characters
 
 #define KR_1_1_1 KC_ESC
 #define KR_1_1_2 KC_DEL
@@ -105,7 +105,7 @@
 
 
 
-// ##### Layer 2
+// ##### Layer 2 Navigation
 
 #define KR_2_1_1 KC_ESC
 #define KR_2_1_2 KC_DEL
@@ -156,7 +156,7 @@
 
 
 
-// ##### Layer 3
+// ##### Layer 3 Numpad
 
 #define KR_3_1_1 TD(ESC_FRC)
 #define KR_3_1_2 KC_DEL
