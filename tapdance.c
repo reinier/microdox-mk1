@@ -1,15 +1,10 @@
 // Tap Dance keycodes
 enum td_keycodes {
-    DOT_EL, // `…` when held, `.` when pressed, `@` when double tapped
+    DOT_EL, // `…` when double tap, `.` when pressed
     EUR_DOL, // `$` when double pressed, `€` when pressed
-    DASH_EM, // `—` (OPT-SHFT -) when held, `-` when pressed
     PI_PASTE, // `SHFT-OPT-CMD v` when held, | when pressed
     ESC_FRC, // `Force quit` when held, ESC when pressed
     CMD_EXL,
-    ALT_COLN,
-    CMD_LPRN,
-    ALT_RPRN
-    // HYPR_TAB
 };
 
 typedef enum {
@@ -44,9 +39,6 @@ void dotel_reset(qk_tap_dance_state_t *state, void *user_data);
 void eurdol_finished(qk_tap_dance_state_t *state, void *user_data);
 void eurdol_reset(qk_tap_dance_state_t *state, void *user_data);
 
-void dashem_finished(qk_tap_dance_state_t *state, void *user_data);
-void dashem_reset(qk_tap_dance_state_t *state, void *user_data);
-
 void pipaste_finished(qk_tap_dance_state_t *state, void *user_data);
 void pipaste_reset(qk_tap_dance_state_t *state, void *user_data);
 
@@ -55,18 +47,6 @@ void escfrc_reset(qk_tap_dance_state_t *state, void *user_data);
 
 void cmdexl_finished(qk_tap_dance_state_t *state, void *user_data);
 void cmdexl_reset(qk_tap_dance_state_t *state, void *user_data);
-
-void altcoln_finished(qk_tap_dance_state_t *state, void *user_data);
-void altcoln_reset(qk_tap_dance_state_t *state, void *user_data);
-
-void cmdlprn_finished(qk_tap_dance_state_t *state, void *user_data);
-void cmdlprn_reset(qk_tap_dance_state_t *state, void *user_data);
-
-void altrprn_finished(qk_tap_dance_state_t *state, void *user_data);
-void altrprn_reset(qk_tap_dance_state_t *state, void *user_data);
-
-// void hyprtab_finished(qk_tap_dance_state_t *state, void *user_data);
-// void hyprtab_reset(qk_tap_dance_state_t *state, void *user_data);
 
 /* Return an integer that corresponds to what kind of tap dance should be executed.
  *
@@ -128,10 +108,7 @@ void dotel_finished(qk_tap_dance_state_t *state, void *user_data) {
         case TD_SINGLE_TAP: // .
             register_code16(KC_DOT);
             break;
-        case TD_DOUBLE_TAP: // @
-            register_code16(LSFT(KC_2));
-            break;
-        case TD_TRIPLE_TAP: // …
+        case TD_DOUBLE_TAP: // …
             register_code16(LOPT(KC_SCLN));
             break;
         default:
@@ -145,9 +122,6 @@ void dotel_reset(qk_tap_dance_state_t *state, void *user_data) {
             unregister_code16(KC_DOT);
             break;
         case TD_DOUBLE_TAP:
-            unregister_code16(LSFT(KC_2));
-            break;
-        case TD_TRIPLE_TAP:
             unregister_code16(LOPT(KC_SCLN));
             break;
         default:
@@ -178,41 +152,6 @@ void eurdol_reset(qk_tap_dance_state_t *state, void *user_data) {
             break;
         case TD_DOUBLE_TAP:
             unregister_code16(LSFT(KC_4));
-            break;
-        default:
-            break;
-    }
-}
-
-// DASHEM
-
-void dashem_finished(qk_tap_dance_state_t *state, void *user_data) {
-    td_state = cur_dance(state);
-    switch (td_state) {
-        case TD_SINGLE_TAP: // - (dash)
-            register_code16(KC_MINUS);
-            break;
-        case TD_SINGLE_HOLD:
-            register_code16(KC_RCTL);
-            break;
-        case TD_DOUBLE_TAP: // — (em dash)
-            register_code16(LSA(KC_MINUS));
-            break;
-        default:
-            break;
-    }
-}
-
-void dashem_reset(qk_tap_dance_state_t *state, void *user_data) {
-    switch (td_state) {
-        case TD_SINGLE_TAP:
-            unregister_code16(KC_MINUS);
-            break;
-        case TD_SINGLE_HOLD:
-            unregister_code16(KC_RCTL);
-            break;
-        case TD_DOUBLE_TAP:
-            unregister_code16(LSA(KC_MINUS));
             break;
         default:
             break;
@@ -306,132 +245,11 @@ void cmdexl_reset(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-// ALT COLN
-
-void altcoln_finished(qk_tap_dance_state_t *state, void *user_data) {
-    td_state = cur_dance(state);
-    switch (td_state) {
-        case TD_SINGLE_TAP:
-            register_code16(KC_COLN);
-            break;
-        case TD_SINGLE_HOLD:
-            register_code16(KC_LALT);
-            break;
-        default:
-            break;
-    }
-}
-
-void altcoln_reset(qk_tap_dance_state_t *state, void *user_data) {
-    switch (td_state) {
-        case TD_SINGLE_TAP:
-            unregister_code16(KC_COLN);
-            break;
-        case TD_SINGLE_HOLD:
-            unregister_code16(KC_LALT);
-            break;
-        default:
-            break;
-    }
-}
-
-// CMD LPRN
-
-void cmdlprn_finished(qk_tap_dance_state_t *state, void *user_data) {
-    td_state = cur_dance(state);
-    switch (td_state) {
-        case TD_SINGLE_TAP:
-            register_code16(KC_LPRN);
-            break;
-        case TD_SINGLE_HOLD:
-            register_code16(KC_RGUI);
-            break;
-        default:
-            break;
-    }
-}
-
-void cmdlprn_reset(qk_tap_dance_state_t *state, void *user_data) {
-    switch (td_state) {
-        case TD_SINGLE_TAP:
-            unregister_code16(KC_LPRN);
-            break;
-        case TD_SINGLE_HOLD:
-            unregister_code16(KC_RGUI);
-            break;
-        default:
-            break;
-    }
-}
-
-// ALT RPRN
-
-void altrprn_finished(qk_tap_dance_state_t *state, void *user_data) {
-    td_state = cur_dance(state);
-    switch (td_state) {
-        case TD_SINGLE_TAP:
-            register_code16(KC_RPRN);
-            break;
-        case TD_SINGLE_HOLD:
-            register_code16(KC_RALT);
-            break;
-        default:
-            break;
-    }
-}
-
-void altrprn_reset(qk_tap_dance_state_t *state, void *user_data) {
-    switch (td_state) {
-        case TD_SINGLE_TAP:
-            unregister_code16(KC_RPRN);
-            break;
-        case TD_SINGLE_HOLD:
-            unregister_code16(KC_RALT);
-            break;
-        default:
-            break;
-    }
-}
-
-// HYPER TAB
-
-// void hyprtab_finished(qk_tap_dance_state_t *state, void *user_data) {
-//     td_state = cur_dance(state);
-//     switch (td_state) {
-//         case TD_SINGLE_TAP: // Paste and match style
-//             register_code16(KC_TAB);
-//             break;
-//         case TD_SINGLE_HOLD: // |
-//             register_code16(HYPR(KC_NO));
-//             break;
-//         default:
-//             break;
-//     }
-// }
-//
-// void hyprtab_reset(qk_tap_dance_state_t *state, void *user_data) {
-//     switch (td_state) {
-//         case TD_SINGLE_TAP:
-//             unregister_code16(KC_TAB);
-//             break;
-//         case TD_SINGLE_HOLD:
-//             unregister_code16(HYPR(KC_NO));
-//             break;
-//         default:
-//             break;
-//     }
-// }
-
 // Define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
 qk_tap_dance_action_t tap_dance_actions[] = {
     [DOT_EL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dotel_finished, dotel_reset),
     [EUR_DOL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, eurdol_finished, eurdol_reset),
-    [DASH_EM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dashem_finished, dashem_reset),
     [PI_PASTE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, pipaste_finished, pipaste_reset),
     [ESC_FRC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, escfrc_finished, escfrc_reset),
     [CMD_EXL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, cmdexl_finished, cmdexl_reset),
-    [ALT_COLN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, altcoln_finished, altcoln_reset),
-    [CMD_LPRN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, cmdlprn_finished, cmdlprn_reset),
-    [ALT_RPRN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, altrprn_finished, altrprn_reset)
-    // [HYPR_TAB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, hyprtab_finished, hyprtab_reset, 150)
 };

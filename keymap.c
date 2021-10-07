@@ -19,71 +19,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "combos.c"
 #include "tapdance.c"
+#include "definekeys.c"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  [0] = LAYOUT_split_3x5_3(
+    KR_0_1_1,  KR_0_1_2,  KR_0_1_3,  KR_0_1_4,  KR_0_1_5,       KR_0_1_6,  KR_0_1_7,  KR_0_1_8,  KR_0_1_9,  KR_0_1_10,
+    KR_0_2_1,  KR_0_2_2,  KR_0_2_3,  KR_0_2_4,  KR_0_2_5,       KR_0_2_6,  KR_0_2_7,  KR_0_2_8,  KR_0_2_9,  KR_0_2_10,
+    KR_0_3_1,  KR_0_3_2,  KR_0_3_3,  KR_0_3_4,  KR_0_3_5,       KR_0_3_6,  KR_0_3_7,  KR_0_3_8,  KR_0_3_9,  KR_0_3_10,
+                          KR_0_4_1,  KR_0_4_2,  KR_0_4_3,       KR_0_4_4,  KR_0_4_5,  KR_0_4_6
 
-[0] = LAYOUT_split_3x5_3(
-    KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,               KC_Y,           KC_U,           KC_I,           KC_O,           KC_BSPC,
-    SFT_T(KC_A),    LCTL_T(KC_S),   LALT_T(KC_D),   LGUI_T(KC_F),   KC_G,               KC_H,           RGUI_T(KC_J),   RALT_T(KC_K),   RCTL_T(KC_L),   RSFT_T(KC_P),
-    KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,               KC_N,           KC_M,           KC_COMM,        TD(DOT_EL),     KC_SLSH,
-                                    MEH(KC_NO),     HYPR_T(KC_SPC), KC_TAB,             LT(1, KC_ENT),  TT(2),          TT(3)
-),
+  ),
 
-// ONE SHOTS
-[1] = LAYOUT_split_3x5_3(
-    KC_ESC,         KC_NO,          TD(EUR_DOL),    KC_HASH,        KC_UNDS,            KC_DQUO,        LSFT(KC_LBRC),  LSFT(KC_RBRC),  KC_TILD,        KC_BSPC,
-    SFT_T(KC_A),    LCTL_T(KC_SCLN),TD(ALT_COLN),   TD(CMD_EXL),    KC_NO,              KC_QUOT,        TD(CMD_LPRN),   TD(ALT_RPRN),   TD(DASH_EM),    RSFT_T(KC_NO),
-    LALT(KC_BSLS),  LSA(KC_BSLS),   LALT(KC_8),     TD(PI_PASTE),   KC_AMPR,            KC_GRV,         KC_LBRC,        KC_RBRC,        KC_CIRC,        KC_BSLASH,
-                                    MEH(KC_NO),     HYPR_T(KC_SPC), KC_TAB,             LT(1, KC_ENT),  TT(2),          TT(3)
-),
+  [1] = LAYOUT_split_3x5_3(
+    KR_1_1_1,  KR_1_1_2,  KR_1_1_3,  KR_1_1_4,  KR_1_1_5,       KR_1_1_6,  KR_1_1_7,  KR_1_1_8,  KR_1_1_9,  KR_1_1_10,
+    KR_1_2_1,  KR_1_2_2,  KR_1_2_3,  KR_1_2_4,  KR_1_2_5,       KR_1_2_6,  KR_1_2_7,  KR_1_2_8,  KR_1_2_9,  KR_1_2_10,
+    KR_1_3_1,  KR_1_3_2,  KR_1_3_3,  KR_1_3_4,  KR_1_3_5,       KR_1_3_6,  KR_1_3_7,  KR_1_3_8,  KR_1_3_9,  KR_1_3_10,
+                          KR_1_4_1,  KR_1_4_2,  KR_1_4_3,       KR_1_4_4,  KR_1_4_5,  KR_1_4_6
+    
+    ),
 
-// NAVIGATION
-[2] = LAYOUT_split_3x5_3(
-  KC_ESC,           KC_BRID,        KC_BRIU,        LGUI(KC_GRV),   LCTL(KC_TAB),       KC_PGUP,        LGUI(KC_LBRC),  KC_UP,          LGUI(KC_RBRC),  KC_BSPC,
-  KC_LSFT,          KC_LCTL,        KC_LOPT,        KC_LCMD,        KC_NO,              KC_PGDN,        KC_LEFT,        KC_DOWN,        KC_RGHT,        KC_NO,
-  KC_NO,            KC_NO,          KC_NO,          KC_NO,          KC_NO,              KC_NO,          LGUI(KC_MINUS), LGUI(KC_EQL),   KC_NO,          KC_NO,
-                                    TO(0),          HYPR_T(KC_SPC), KC_TAB,             LT(1, KC_ENT),  TT(2),          TT(3)
-),
+  [2] = LAYOUT_split_3x5_3(
+    KR_2_1_1,  KR_2_1_2,  KR_2_1_3,  KR_2_1_4,  KR_2_1_5,       KR_2_1_6,  KR_2_1_7,  KR_2_1_8,  KR_2_1_9,  KR_2_1_10,
+    KR_2_2_1,  KR_2_2_2,  KR_2_2_3,  KR_2_2_4,  KR_2_2_5,       KR_2_2_6,  KR_2_2_7,  KR_2_2_8,  KR_2_2_9,  KR_2_2_10,
+    KR_2_3_1,  KR_2_3_2,  KR_2_3_3,  KR_2_3_4,  KR_2_3_5,       KR_2_3_6,  KR_2_3_7,  KR_2_3_8,  KR_2_3_9,  KR_2_3_10,
+                          KR_2_4_1,  KR_2_4_2,  KR_2_4_3,       KR_2_4_4,  KR_2_4_5,  KR_2_4_6
+    
+    ),
 
-// NUMPAD
-[3] = LAYOUT_split_3x5_3(
-  TD(ESC_FRC),      KC_DEL,         KC_NO,          KC_NO,          KC_PERC,            KC_PMNS,        KC_7,           KC_8,           KC_9,           KC_BSPC,
-  KC_LSFT,          KC_LCTL,        KC_LOPT,        KC_LCMD,        KC_COLN,            KC_PPLS,        KC_4,           KC_5,           KC_6,           KC_COMM,
-  KC_NO,            KC_NO,          KC_PSLS,        KC_ASTR,        KC_PEQL,            KC_0,           KC_1,           KC_2,           KC_3,           KC_DOT,
-                                    TO(0),          HYPR_T(KC_SPC), KC_TAB,             LT(1, KC_ENT),  TT(2),          TT(3)
-)
-
+  [3] = LAYOUT_split_3x5_3(
+    KR_3_1_1,  KR_3_1_2,  KR_3_1_3,  KR_3_1_4,  KR_3_1_5,       KR_3_1_6,  KR_3_1_7,  KR_3_1_8,  KR_3_1_9,  KR_3_1_10,
+    KR_3_2_1,  KR_3_2_2,  KR_3_2_3,  KR_3_2_4,  KR_3_2_5,       KR_3_2_6,  KR_3_2_7,  KR_3_2_8,  KR_3_2_9,  KR_3_2_10,
+    KR_3_3_1,  KR_3_3_2,  KR_3_3_3,  KR_3_3_4,  KR_3_3_5,       KR_3_3_6,  KR_3_3_7,  KR_3_3_8,  KR_3_3_9,  KR_3_3_10,
+                          KR_3_4_1,  KR_3_4_2,  KR_3_4_3,       KR_3_4_4,  KR_3_4_5,  KR_3_4_6
+    
+    ),
 };
-
-
-// -- moonlander
-
-// const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-//     [0] = LAYOUT_moonlander(
-//         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,     KC_Y,           KC_U,           KC_I,           KC_O,           KC_BSPC,
-//         SFT_T(KC_A),    LCTL_T(KC_S),   LALT_T(KC_D),   LGUI_T(KC_F),   KC_G,      KC_H,           RGUI_T(KC_J),   RALT_T(KC_K),   RCTL_T(KC_L),   RSFT_T(KC_P),
-//         KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,       KC_N,           KC_M,           KC_COMM,        TD(DOT_EL),         KC_SLSH,
-//         MEH(KC_NO),     KC_SPC,         HYPR_T(KC_TAB),                              LT(1, KC_ENT),         TT(2),          TT(3)
-//     ),
-//
-//     [1] = LAYOUT_moonlander(
-// KC_ESC,           KC_HASH,        TD(EUR_DOL),    KC_UNDS,        KC_DQUO,                 KC_QUOT,        KC_NO,          KC_NO,        KC_TILD,        KC_BSPC,
-// KC_LSFT,          KC_LCTL,        KC_LOPT,        KC_LCMD,        TD(DASH_EM),         KC_GRV,         KC_EXLM,        KC_COLN,      KC_NO,          KC_NO,
-// LALT(KC_BSLS),    LSA(KC_BSLS),   LALT(KC_8),     TD(PI_PASTE),   KC_AMPR,               KC_SCLN,        KC_LBRC,        KC_RBRC,      KC_CIRC,        KC_BSLASH,
-//  MEH(KC_NO),     KC_SPC,         HYPR_T(KC_TAB),                              LT(1, KC_ENT),         TT(2),          TT(3),
-//     ),
-//
-//     [2] = LAYOUT_moonlander(
-//         KC_ESC,           KC_BRID,        KC_BRIU,        LGUI(KC_GRV),   LCTL(KC_TAB),                 KC_PGUP,        LGUI(KC_LBRC),  KC_UP,          LGUI(KC_RBRC),  KC_BSPC,
-//         KC_LSFT,          KC_LCTL,        KC_LOPT,        KC_LCMD,        KC_NO,                          KC_PGDN,        KC_LEFT,        KC_DOWN,        KC_RGHT,        KC_NO,
-//         KC_NO,            KC_NO,          KC_NO,          KC_NO,          KC_NO,                          KC_NO,          KC_MINUS,       KC_EQL,         KC_NO,          KC_NO,
-//                     TO(0),          KC_SPC,         HYPR_T(KC_TAB),                              LT(1, KC_ENT),         TT(2),          TT(3)
-//     ),
-//
-//     [3] = LAYOUT_moonlander(
-//         TD(ESC_FRC),      KC_DEL,         KC_NO,          KC_PERC,        KC_TAB,                 KC_PMNS,        KC_7,           KC_8,           KC_9,           KC_BSPC,
-//         KC_LSFT,          KC_LCTL,        KC_LOPT,        KC_LCMD,        KC_COLN,                KC_PPLS,        KC_4,           KC_5,           KC_6,           KC_COMM,
-//         KC_NO,            KC_NO,          KC_PSLS,        KC_ASTR,        KC_PEQL,                KC_0,           KC_1,           KC_2,           KC_3,           KC_DOT,
-//         TO(0),          KC_SPC,         HYPR_T(KC_TAB),                              LT(1, KC_ENT),         TT(2),          TT(3)
-//     ),
-// };
