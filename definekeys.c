@@ -1,3 +1,41 @@
+///////
+
+bool is_cmd_tab_active = false; // ADD this near the begining of keymap.c
+uint16_t cmd_tab_timer = 0;     // we will be using them soon.
+
+enum custom_keycodes {          // Make sure have the awesome keycode ready
+  CMD_TAB = SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) { // This will do most of the grunt work with the keycodes.
+    case CMD_TAB:
+      if (record->event.pressed) {
+        if (!is_cmd_tab_active) {
+          is_cmd_tab_active = true;
+          register_code(KC_LGUI);
+        }
+        cmd_tab_timer = timer_read();
+        register_code(KC_TAB);
+      } else {
+        unregister_code(KC_TAB);
+      }
+      break;
+  }
+  return true;
+}
+
+void matrix_scan_user(void) { // The very important timer.
+  if (is_cmd_tab_active) {
+    if (timer_elapsed(cmd_tab_timer) > 1000) {
+      unregister_code(KC_LGUI);
+      is_cmd_tab_active = false;
+    }
+  }
+}
+
+////////////
+
 // # Layer 0
 
 // Top row
@@ -16,7 +54,7 @@
 
 // Mid row
 
-#define KR_0_2_1 SFT_T(KC_A)
+#define KR_0_2_1 KC_A
 #define KR_0_2_2 LCTL_T(KC_S)
 #define KR_0_2_3 LALT_T(KC_D)
 #define KR_0_2_4 LGUI_T(KC_F)
@@ -26,7 +64,7 @@
 #define KR_0_2_7 RGUI_T(KC_J)
 #define KR_0_2_8 RALT_T(KC_K)
 #define KR_0_2_9 RCTL_T(KC_L)
-#define KR_0_2_10 RSFT_T(KC_BSPC)
+#define KR_0_2_10 KC_BSPC
 
 // Bottom row
 
@@ -44,10 +82,9 @@
 
 // Thumb cluster
 
-#define KR_0_4_1 KC_MEH
+#define KR_0_4_1 KC_HYPR
 #define KR_0_4_2 KC_SPC
-#define KR_0_4_3 KC_HYPR
-//
+#define KR_0_4_3 KC_SFTENT // Shift when held, enter when pressed  
 #define KR_0_4_4 TT(2)
 #define KR_0_4_5 OSL(1)
 #define KR_0_4_6 TT(3)
@@ -69,8 +106,8 @@
 #define KR_1_1_10 KC_NO
 
 
-#define KR_1_2_1 SFT_T(KC_A)
-#define KR_1_2_2 LCTL_T(KC_AMPR)
+#define KR_1_2_1 KC_TAB
+#define KR_1_2_2 TD(CTRL_AMP)
 #define KR_1_2_3 LALT_T(KC_SCLN)
 #define KR_1_2_4 TD(CMD_EXL)
 #define KR_1_2_5 KC_COLN
@@ -79,7 +116,7 @@
 #define KR_1_2_7 RGUI_T(KC_LBRC)
 #define KR_1_2_8 RALT_T(KC_RBRC)
 #define KR_1_2_9 RCTL_T(KC_MINUS)
-#define KR_1_2_10 RSFT_T(KC_BSPC)
+#define KR_1_2_10 KC_BSPC
 
 
 #define KR_1_3_1 LALT(KC_BSLS)
@@ -95,9 +132,9 @@
 #define KR_1_3_10 KC_BSLASH
 
 
-#define KR_1_4_1 KC_MEH
+#define KR_1_4_1 KC_HYPR
 #define KR_1_4_2 KC_SPC
-#define KR_1_4_3 KC_HYPR
+#define KR_1_4_3 KC_TRNS // SHIFT
 //
 #define KR_1_4_4 TT(2)
 #define KR_1_4_5 OSL(1)
@@ -109,7 +146,7 @@
 
 #define KR_2_1_1 KC_ESC
 #define KR_2_1_2 KC_DEL
-#define KR_2_1_3 KC_NO
+#define KR_2_1_3 CMD_TAB
 #define KR_2_1_4 LGUI(KC_GRV)
 #define KR_2_1_5 LCTL(KC_TAB)
 //
@@ -120,7 +157,7 @@
 #define KR_2_1_10 KC_NO
 
 
-#define KR_2_2_1 KC_LSFT
+#define KR_2_2_1 KC_TAB
 #define KR_2_2_2 KC_LCTL
 #define KR_2_2_3 KC_LOPT
 #define KR_2_2_4 KC_LCMD
@@ -130,7 +167,7 @@
 #define KR_2_2_7 KC_LEFT
 #define KR_2_2_8 KC_DOWN
 #define KR_2_2_9 KC_RGHT
-#define KR_2_2_10 RSFT_T(KC_BSPC)
+#define KR_2_2_10 KC_BSPC
 
 
 #define KR_2_3_1 KC_NO
@@ -148,7 +185,7 @@
 
 #define KR_2_4_1 TO(0)
 #define KR_2_4_2 KC_SPC
-#define KR_2_4_3 KC_HYPR
+#define KR_2_4_3 KC_TRNS // SHIFT
 //
 #define KR_2_4_4 TT(2)
 #define KR_2_4_5 OSL(1)
@@ -171,7 +208,7 @@
 #define KR_3_1_10 KC_NO
 
 
-#define KR_3_2_1 KC_LSFT
+#define KR_3_2_1 KC_TAB
 #define KR_3_2_2 KC_LCTL
 #define KR_3_2_3 LALT_T(KC_PMNS)
 #define KR_3_2_4 LGUI_T(KC_PPLS)
@@ -199,7 +236,7 @@
 
 #define KR_3_4_1 TO(0)
 #define KR_3_4_2 KC_SPC
-#define KR_3_4_3 KC_HYPR
+#define KR_3_4_3 KC_TRNS // SHIFT
 //
 #define KR_3_4_4 TT(2)
 #define KR_3_4_5 OSL(1)

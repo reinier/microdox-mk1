@@ -5,7 +5,10 @@ enum td_keycodes {
     PI_PASTE, // `SHFT-OPT-CMD v` when held, | when pressed
     ESC_FRC, // `Force quit` when held, ESC when pressed
     CMD_EXL,
+    CTRL_AMP
 };
+
+//KC_AMPR
 
 typedef enum {
     TD_NONE,
@@ -47,6 +50,9 @@ void escfrc_reset(qk_tap_dance_state_t *state, void *user_data);
 
 void cmdexl_finished(qk_tap_dance_state_t *state, void *user_data);
 void cmdexl_reset(qk_tap_dance_state_t *state, void *user_data);
+
+void ctrlamp_finished(qk_tap_dance_state_t *state, void *user_data);
+void ctrlamp_reset(qk_tap_dance_state_t *state, void *user_data);
 
 /* Return an integer that corresponds to what kind of tap dance should be executed.
  *
@@ -245,6 +251,35 @@ void cmdexl_reset(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
+// CTRL EXL
+
+void ctrlamp_finished(qk_tap_dance_state_t *state, void *user_data) {
+    td_state = cur_dance(state);
+    switch (td_state) {
+        case TD_SINGLE_TAP:
+            register_code16(KC_AMPR);
+            break;
+        case TD_SINGLE_HOLD:
+            register_code16(KC_LCTRL);
+            break;
+        default:
+            break;
+    }
+}
+
+void ctrlamp_reset(qk_tap_dance_state_t *state, void *user_data) {
+    switch (td_state) {
+        case TD_SINGLE_TAP:
+            unregister_code16(KC_AMPR);
+            break;
+        case TD_SINGLE_HOLD:
+            unregister_code16(KC_LCTRL);
+            break;
+        default:
+            break;
+    }
+}
+
 // Define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
 qk_tap_dance_action_t tap_dance_actions[] = {
     [DOT_EL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dotel_finished, dotel_reset),
@@ -252,4 +287,5 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [PI_PASTE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, pipaste_finished, pipaste_reset),
     [ESC_FRC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, escfrc_finished, escfrc_reset),
     [CMD_EXL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, cmdexl_finished, cmdexl_reset),
+    [CTRL_AMP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ctrlamp_finished, ctrlamp_reset),
 };
