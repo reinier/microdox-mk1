@@ -1,41 +1,3 @@
-///////
-
-bool is_cmd_tab_active = false; // ADD this near the begining of keymap.c
-uint16_t cmd_tab_timer = 0;     // we will be using them soon.
-
-enum custom_keycodes {          // Make sure have the awesome keycode ready
-  CMD_TAB = SAFE_RANGE,
-};
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) { // This will do most of the grunt work with the keycodes.
-    case CMD_TAB:
-      if (record->event.pressed) {
-        if (!is_cmd_tab_active) {
-          is_cmd_tab_active = true;
-          register_code(KC_LGUI);
-        }
-        cmd_tab_timer = timer_read();
-        register_code(KC_TAB);
-      } else {
-        unregister_code(KC_TAB);
-      }
-      break;
-  }
-  return true;
-}
-
-void matrix_scan_user(void) { // The very important timer.
-  if (is_cmd_tab_active) {
-    if (timer_elapsed(cmd_tab_timer) > 1000) {
-      unregister_code(KC_LGUI);
-      is_cmd_tab_active = false;
-    }
-  }
-}
-
-////////////
-
 // # Layer 0
 
 // Top row
@@ -83,8 +45,8 @@ void matrix_scan_user(void) { // The very important timer.
 // Thumb cluster
 
 #define KR_0_4_1 KC_HYPR
-#define KR_0_4_2 KC_SPC
-#define KR_0_4_3 KC_SFTENT // Shift when held, enter when pressed  
+#define KR_0_4_2 SFT_T(KC_SPACE)
+#define KR_0_4_3 KC_ENTER
 #define KR_0_4_4 TT(2)
 #define KR_0_4_5 OSL(1)
 #define KR_0_4_6 TT(3)
@@ -105,17 +67,18 @@ void matrix_scan_user(void) { // The very important timer.
 #define KR_1_1_9 KC_TILD
 #define KR_1_1_10 KC_NO
 
+// Mid row
 
 #define KR_1_2_1 KC_TAB
 #define KR_1_2_2 TD(CTRL_AMP)
-#define KR_1_2_3 LALT_T(KC_SCLN)
+#define KR_1_2_3 LALT_T(KC_MINUS)
 #define KR_1_2_4 TD(CMD_EXL)
 #define KR_1_2_5 KC_COLN
 //
 #define KR_1_2_6 KC_NO
-#define KR_1_2_7 RGUI_T(KC_LBRC)
-#define KR_1_2_8 RALT_T(KC_RBRC)
-#define KR_1_2_9 RCTL_T(KC_MINUS)
+#define KR_1_2_7 TD(CMD_LPRN)
+#define KR_1_2_8 TD(ALT_RPRN)
+#define KR_1_2_9 RCTL_T(KC_SCLN)
 #define KR_1_2_10 KC_BSPC
 
 
@@ -126,15 +89,15 @@ void matrix_scan_user(void) { // The very important timer.
 #define KR_1_3_5 LSFT(KC_2)
 //
 #define KR_1_3_6 KC_NO
-#define KR_1_3_7 LSFT(KC_LBRC)
-#define KR_1_3_8 LSFT(KC_RBRC)
+#define KR_1_3_7 KC_LBRC
+#define KR_1_3_8 KC_RBRC
 #define KR_1_3_9 KC_CIRC
 #define KR_1_3_10 KC_BSLASH
 
 
 #define KR_1_4_1 KC_HYPR
-#define KR_1_4_2 KC_SPC
-#define KR_1_4_3 KC_TRNS // SHIFT
+#define KR_1_4_2 KC_TRNS
+#define KR_1_4_3 KC_TRNS
 //
 #define KR_1_4_4 TT(2)
 #define KR_1_4_5 OSL(1)
@@ -184,8 +147,8 @@ void matrix_scan_user(void) { // The very important timer.
 
 
 #define KR_2_4_1 TO(0)
-#define KR_2_4_2 KC_SPC
-#define KR_2_4_3 KC_TRNS // SHIFT
+#define KR_2_4_2 KC_TRNS
+#define KR_2_4_3 KC_TRNS
 //
 #define KR_2_4_4 TT(2)
 #define KR_2_4_5 OSL(1)
@@ -199,7 +162,7 @@ void matrix_scan_user(void) { // The very important timer.
 #define KR_3_1_2 KC_DEL
 #define KR_3_1_3 KC_NO
 #define KR_3_1_4 KC_PERC
-#define KR_3_1_5 KC_TAB
+#define KR_3_1_5 KC_NO
 //
 #define KR_3_1_6 KC_DOT
 #define KR_3_1_7 KC_7
@@ -235,8 +198,8 @@ void matrix_scan_user(void) { // The very important timer.
 
 
 #define KR_3_4_1 TO(0)
-#define KR_3_4_2 KC_SPC
-#define KR_3_4_3 KC_TRNS // SHIFT
+#define KR_3_4_2 KC_TRNS
+#define KR_3_4_3 KC_TRNS
 //
 #define KR_3_4_4 TT(2)
 #define KR_3_4_5 OSL(1)

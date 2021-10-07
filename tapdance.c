@@ -5,10 +5,10 @@ enum td_keycodes {
     PI_PASTE, // `SHFT-OPT-CMD v` when held, | when pressed
     ESC_FRC, // `Force quit` when held, ESC when pressed
     CMD_EXL,
-    CTRL_AMP
+    CTRL_AMP,
+    CMD_LPRN,
+    ALT_RPRN
 };
-
-//KC_AMPR
 
 typedef enum {
     TD_NONE,
@@ -53,6 +53,12 @@ void cmdexl_reset(qk_tap_dance_state_t *state, void *user_data);
 
 void ctrlamp_finished(qk_tap_dance_state_t *state, void *user_data);
 void ctrlamp_reset(qk_tap_dance_state_t *state, void *user_data);
+
+void cmdlprn_finished(qk_tap_dance_state_t *state, void *user_data);
+void cmdlprn_reset(qk_tap_dance_state_t *state, void *user_data);
+
+void altrprn_finished(qk_tap_dance_state_t *state, void *user_data);
+void altrprn_reset(qk_tap_dance_state_t *state, void *user_data);
 
 /* Return an integer that corresponds to what kind of tap dance should be executed.
  *
@@ -114,7 +120,11 @@ void dotel_finished(qk_tap_dance_state_t *state, void *user_data) {
         case TD_SINGLE_TAP: // .
             register_code16(KC_DOT);
             break;
-        case TD_DOUBLE_TAP: // …
+        case TD_DOUBLE_TAP: // ..
+            tap_code16(KC_DOT);
+            register_code16(KC_DOT);  
+            break;
+        case TD_TRIPLE_TAP: // …
             register_code16(LOPT(KC_SCLN));
             break;
         default:
@@ -128,6 +138,9 @@ void dotel_reset(qk_tap_dance_state_t *state, void *user_data) {
             unregister_code16(KC_DOT);
             break;
         case TD_DOUBLE_TAP:
+            unregister_code16(KC_DOT);
+            break;
+        case TD_TRIPLE_TAP:
             unregister_code16(LOPT(KC_SCLN));
             break;
         default:
@@ -280,6 +293,64 @@ void ctrlamp_reset(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
+// CMD LPRN
+
+void cmdlprn_finished(qk_tap_dance_state_t *state, void *user_data) {
+    td_state = cur_dance(state);
+    switch (td_state) {
+        case TD_SINGLE_TAP:
+            register_code16(KC_LPRN);
+            break;
+        case TD_SINGLE_HOLD:
+            register_code16(KC_RGUI);
+            break;
+        default:
+            break;
+    }
+}
+
+void cmdlprn_reset(qk_tap_dance_state_t *state, void *user_data) {
+    switch (td_state) {
+        case TD_SINGLE_TAP:
+            unregister_code16(KC_LPRN);
+            break;
+        case TD_SINGLE_HOLD:
+            unregister_code16(KC_RGUI);
+            break;
+        default:
+            break;
+    }
+}
+
+// ALT RPRN
+
+void altrprn_finished(qk_tap_dance_state_t *state, void *user_data) {
+    td_state = cur_dance(state);
+    switch (td_state) {
+        case TD_SINGLE_TAP:
+            register_code16(KC_RPRN);
+            break;
+        case TD_SINGLE_HOLD:
+            register_code16(KC_RALT);
+            break;
+        default:
+            break;
+    }
+}
+
+void altrprn_reset(qk_tap_dance_state_t *state, void *user_data) {
+    switch (td_state) {
+        case TD_SINGLE_TAP:
+            unregister_code16(KC_RPRN);
+            break;
+        case TD_SINGLE_HOLD:
+            unregister_code16(KC_RALT);
+            break;
+        default:
+            break;
+    }
+}
+
 // Define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
 qk_tap_dance_action_t tap_dance_actions[] = {
     [DOT_EL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dotel_finished, dotel_reset),
@@ -288,4 +359,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [ESC_FRC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, escfrc_finished, escfrc_reset),
     [CMD_EXL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, cmdexl_finished, cmdexl_reset),
     [CTRL_AMP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ctrlamp_finished, ctrlamp_reset),
+    [CMD_LPRN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, cmdlprn_finished, cmdlprn_reset),
+    [ALT_RPRN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, altrprn_finished, altrprn_reset),
 };
