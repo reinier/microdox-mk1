@@ -1,6 +1,6 @@
 # Microdox mk1
 
-With this keymap I try to accomplish a couple of things:
+With this [QMK](https://beta.docs.qmk.fm) keymap I try to accomplish a couple of things:
 
 - Keep qwerty my main layout for now
 - Only use 36 keys
