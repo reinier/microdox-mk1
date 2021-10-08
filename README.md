@@ -9,6 +9,10 @@ With this [QMK](https://beta.docs.qmk.fm) keymap I try to accomplish a couple of
 - Easy sync between my [Microdox](https://boardsource.xyz/store/5f2e7e4a2902de7151494f92) and [Moonlander](https://www.zsa.io/moonlander/) ([my Moonlander keymap](https://github.com/reinier/moonlander-mk1)) by adding an extra mapping in `definekeys.c`
 - Minimize pinky use on both sides for ergonomic reasons
 
-How it looks now:
+The keymap:
 
 ![Keymap microdox](./keymap.png?raw=true)
+
+The keyboard:
+
+![Microdox keyboard](./microdox.png?raw=true)
