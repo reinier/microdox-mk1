@@ -24,3 +24,4 @@ The keyboard:
 - Test if only 4 thumb keys would work. Sometimes I'm a bit lost on where my thumbs are.
     - Going to layer 3 will be a two step process
 - Add a mouse layer
+- Find good use for the MEH key
