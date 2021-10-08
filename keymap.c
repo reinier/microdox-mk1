@@ -17,9 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-// #include "combos.c"
+#include "combos.c"
 #include "tapdance.c"
-#include "specialkeys.c"
 #include "definekeys.c"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
