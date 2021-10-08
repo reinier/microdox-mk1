@@ -16,17 +16,17 @@
 
 // Mid row
 
-#define KR_0_2_1 KC_A
-#define KR_0_2_2 LCTL_T(KC_S)
-#define KR_0_2_3 LALT_T(KC_D)
+#define KR_0_2_1 LCTL_T(KC_A)
+#define KR_0_2_2 LALT_T(KC_S)
+#define KR_0_2_3 LSFT_T(KC_D)
 #define KR_0_2_4 LGUI_T(KC_F)
 #define KR_0_2_5 KC_G
 //
 #define KR_0_2_6 KC_H
 #define KR_0_2_7 RGUI_T(KC_J)
-#define KR_0_2_8 RALT_T(KC_K)
-#define KR_0_2_9 RCTL_T(KC_L)
-#define KR_0_2_10 KC_P
+#define KR_0_2_8 RSFT_T(KC_K)
+#define KR_0_2_9 RALT_T(KC_L)
+#define KR_0_2_10 RCTL_T(KC_P)
 
 // Bottom row
 
@@ -44,9 +44,9 @@
 
 // Thumb cluster
 
-#define KR_0_4_1 KC_HYPR
+#define KR_0_4_1 KC_MEH
 #define KR_0_4_2 KC_SPACE
-#define KR_0_4_3 KC_LSFT
+#define KR_0_4_3 OSM(MOD_HYPR)
 #define KR_0_4_4 OSL(1)
 #define KR_0_4_5 TT(2)
 #define KR_0_4_6 TT(3)
@@ -69,17 +69,17 @@
 
 // Mid row
 
-#define KR_1_2_1 KC_TAB
-#define KR_1_2_2 TD(CTRL_AMP)
-#define KR_1_2_3 LALT_T(KC_MINUS)
+#define KR_1_2_1 LCTL_T(KC_TAB)
+#define KR_1_2_2 TD(ALT_AMP)
+#define KR_1_2_3 LSFT_T(KC_MINUS)
 #define KR_1_2_4 TD(CMD_EXL)
 #define KR_1_2_5 KC_COLN
 //
 #define KR_1_2_6 KC_NO
 #define KR_1_2_7 TD(CMD_LPRN)
-#define KR_1_2_8 TD(ALT_RPRN)
-#define KR_1_2_9 RCTL_T(KC_SCLN)
-#define KR_1_2_10 KC_ENTER
+#define KR_1_2_8 TD(SFT_RPRN)
+#define KR_1_2_9 RALT_T(KC_SCLN)
+#define KR_1_2_10 RCTL_T(KC_ENTER)
 
 
 #define KR_1_3_1 LALT(KC_BSLS)
@@ -95,7 +95,7 @@
 #define KR_1_3_10 KC_BSLASH
 
 
-#define KR_1_4_1 KC_HYPR
+#define KR_1_4_1 KC_MEH
 #define KR_1_4_2 KC_TRNS
 #define KR_1_4_3 KC_TRNS
 //
@@ -120,9 +120,9 @@
 #define KR_2_1_10 KC_BSPC
 
 
-#define KR_2_2_1 KC_TAB
-#define KR_2_2_2 KC_LCTL
-#define KR_2_2_3 KC_LOPT
+#define KR_2_2_1 LCTL_T(KC_TAB)
+#define KR_2_2_2 KC_LALT
+#define KR_2_2_3 KC_LSFT
 #define KR_2_2_4 KC_LCMD
 #define KR_2_2_5 KC_NO
 //
@@ -171,9 +171,9 @@
 #define KR_3_1_10 KC_BSPC
 
 
-#define KR_3_2_1 KC_TAB
-#define KR_3_2_2 KC_LCTL
-#define KR_3_2_3 LALT_T(KC_PMNS)
+#define KR_3_2_1 LCTL_T(KC_TAB)
+#define KR_3_2_2 KC_LALT
+#define KR_3_2_3 LSFT_T(KC_PMNS)
 #define KR_3_2_4 LGUI_T(KC_PPLS)
 #define KR_3_2_5 KC_COLN
 //

@@ -8,8 +8,8 @@ enum combos {
 
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
-const uint16_t PROGMEM df_combo[]   = {LALT_T(KC_D), LGUI_T(KC_F), COMBO_END};
-const uint16_t PROGMEM jk_combo[]   = {RGUI_T(KC_J), RALT_T(KC_K), COMBO_END};
+const uint16_t PROGMEM df_combo[]   = {LSFT_T(KC_D), LGUI_T(KC_F), COMBO_END};
+const uint16_t PROGMEM jk_combo[]   = {RGUI_T(KC_J), RSFT_T(KC_K), COMBO_END};
 
 combo_t key_combos[] = {
     // D+F = TAB

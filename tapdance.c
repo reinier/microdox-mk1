@@ -5,9 +5,9 @@ enum td_keycodes {
     PI_PASTE, // `SHFT-OPT-CMD v` when held, | when pressed
     ESC_FRC, // `Force quit` when held, ESC when pressed
     CMD_EXL,
-    CTRL_AMP,
+    ALT_AMP,
     CMD_LPRN,
-    ALT_RPRN
+    SFT_RPRN
 };
 
 typedef enum {
@@ -51,14 +51,14 @@ void escfrc_reset(qk_tap_dance_state_t *state, void *user_data);
 void cmdexl_finished(qk_tap_dance_state_t *state, void *user_data);
 void cmdexl_reset(qk_tap_dance_state_t *state, void *user_data);
 
-void ctrlamp_finished(qk_tap_dance_state_t *state, void *user_data);
-void ctrlamp_reset(qk_tap_dance_state_t *state, void *user_data);
+void altamp_finished(qk_tap_dance_state_t *state, void *user_data);
+void altamp_reset(qk_tap_dance_state_t *state, void *user_data);
 
 void cmdlprn_finished(qk_tap_dance_state_t *state, void *user_data);
 void cmdlprn_reset(qk_tap_dance_state_t *state, void *user_data);
 
-void altrprn_finished(qk_tap_dance_state_t *state, void *user_data);
-void altrprn_reset(qk_tap_dance_state_t *state, void *user_data);
+void sftrprn_finished(qk_tap_dance_state_t *state, void *user_data);
+void sftrprn_reset(qk_tap_dance_state_t *state, void *user_data);
 
 /* Return an integer that corresponds to what kind of tap dance should be executed.
  *
@@ -266,7 +266,7 @@ void cmdexl_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 // CTRL EXL
 
-void ctrlamp_finished(qk_tap_dance_state_t *state, void *user_data) {
+void altamp_finished(qk_tap_dance_state_t *state, void *user_data) {
     td_state = cur_dance(state);
     switch (td_state) {
         case TD_SINGLE_TAP:
@@ -280,7 +280,7 @@ void ctrlamp_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void ctrlamp_reset(qk_tap_dance_state_t *state, void *user_data) {
+void altamp_reset(qk_tap_dance_state_t *state, void *user_data) {
     switch (td_state) {
         case TD_SINGLE_TAP:
             unregister_code16(KC_AMPR);
@@ -324,7 +324,7 @@ void cmdlprn_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 // ALT RPRN
 
-void altrprn_finished(qk_tap_dance_state_t *state, void *user_data) {
+void sftrprn_finished(qk_tap_dance_state_t *state, void *user_data) {
     td_state = cur_dance(state);
     switch (td_state) {
         case TD_SINGLE_TAP:
@@ -338,7 +338,7 @@ void altrprn_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void altrprn_reset(qk_tap_dance_state_t *state, void *user_data) {
+void sftrprn_reset(qk_tap_dance_state_t *state, void *user_data) {
     switch (td_state) {
         case TD_SINGLE_TAP:
             unregister_code16(KC_RPRN);
@@ -358,7 +358,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [PI_PASTE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, pipaste_finished, pipaste_reset),
     [ESC_FRC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, escfrc_finished, escfrc_reset),
     [CMD_EXL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, cmdexl_finished, cmdexl_reset),
-    [CTRL_AMP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ctrlamp_finished, ctrlamp_reset),
+    [ALT_AMP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, altamp_finished, altamp_reset),
     [CMD_LPRN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, cmdlprn_finished, cmdlprn_reset),
-    [ALT_RPRN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, altrprn_finished, altrprn_reset),
+    [SFT_RPRN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, sftrprn_finished, sftrprn_reset),
 };
