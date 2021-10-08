@@ -20,7 +20,8 @@ The keyboard:
 ![Microdox keyboard](./microdox.png?raw=true)
 
 ## TODO's
-- Position characters on layer 1 more ergonomically based on most used
+- Position characters on layer 1 more ergonomically based on most used (' and # for example)
 - Test if only 4 thumb keys would work. Sometimes I'm a bit lost on where my thumbs are.
     - Move CTRL and ALT to the sides to make room for SHIFT on D and K 
     - Going to layer 3 will be a two step process
+- Add a mouse layer
