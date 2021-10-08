@@ -1,5 +1,3 @@
-///////
-
 bool is_cmd_tab_active = false; // ADD this near the begining of keymap.c
 uint16_t cmd_tab_timer = 0;     // we will be using them soon.
 
@@ -33,5 +31,3 @@ void matrix_scan_user(void) { // The very important timer.
 	}
   }
 }
-
-////////////

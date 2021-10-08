@@ -47,8 +47,8 @@
 #define KR_0_4_1 KC_HYPR
 #define KR_0_4_2 SFT_T(KC_SPACE)
 #define KR_0_4_3 KC_ENTER
-#define KR_0_4_4 TT(2)
-#define KR_0_4_5 OSL(1)
+#define KR_0_4_4 OSL(1)
+#define KR_0_4_5 TT(2)
 #define KR_0_4_6 TT(3)
 
 
@@ -99,8 +99,8 @@
 #define KR_1_4_2 KC_TRNS
 #define KR_1_4_3 KC_TRNS
 //
-#define KR_1_4_4 TT(2)
-#define KR_1_4_5 OSL(1)
+#define KR_1_4_4 OSL(1)
+#define KR_1_4_5 TT(2)
 #define KR_1_4_6 TT(3)
 
 
@@ -150,8 +150,8 @@
 #define KR_2_4_2 KC_TRNS
 #define KR_2_4_3 KC_TRNS
 //
-#define KR_2_4_4 TT(2)
-#define KR_2_4_5 OSL(1)
+#define KR_2_4_4 OSL(1)
+#define KR_2_4_5 TT(2)
 #define KR_2_4_6 TT(3)
 
 
@@ -201,6 +201,6 @@
 #define KR_3_4_2 KC_TRNS
 #define KR_3_4_3 KC_TRNS
 //
-#define KR_3_4_4 TT(2)
-#define KR_3_4_5 OSL(1)
+#define KR_3_4_4 OSL(1)
+#define KR_3_4_5 TT(2)
 #define KR_3_4_6 TT(3)
