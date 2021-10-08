@@ -23,5 +23,5 @@ The keyboard:
 - Position characters on layer 1 more ergonomically based on most used
 - Move CTRL and ALT to the sides to make room for SHIFT on D and K 
 - Test if only 4 thumb keys would work. Sometimes I'm a bit lost on where my thumbs are.
-  - Move shift back to home row
-  - Going to layer 3 will be a two step process
+    - Move shift back to home row
+    - Going to layer 3 will be a two step process
