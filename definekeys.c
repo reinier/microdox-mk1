@@ -12,7 +12,7 @@
 #define KR_0_1_7 KC_U
 #define KR_0_1_8 KC_I
 #define KR_0_1_9 KC_O
-#define KR_0_1_10 KC_P
+#define KR_0_1_10 KC_BSPC
 
 // Mid row
 
@@ -26,7 +26,7 @@
 #define KR_0_2_7 RGUI_T(KC_J)
 #define KR_0_2_8 RALT_T(KC_K)
 #define KR_0_2_9 RCTL_T(KC_L)
-#define KR_0_2_10 KC_BSPC
+#define KR_0_2_10 KC_P
 
 // Bottom row
 
@@ -65,7 +65,7 @@
 #define KR_1_1_7 KC_QUOT
 #define KR_1_1_8 KC_DQUO
 #define KR_1_1_9 KC_TILD
-#define KR_1_1_10 KC_NO
+#define KR_1_1_10 KC_BSPC
 
 // Mid row
 
@@ -79,7 +79,7 @@
 #define KR_1_2_7 TD(CMD_LPRN)
 #define KR_1_2_8 TD(ALT_RPRN)
 #define KR_1_2_9 RCTL_T(KC_SCLN)
-#define KR_1_2_10 KC_BSPC
+#define KR_1_2_10 KC_ENTER
 
 
 #define KR_1_3_1 LALT(KC_BSLS)
@@ -117,7 +117,7 @@
 #define KR_2_1_7 LGUI(KC_LBRC)
 #define KR_2_1_8 KC_UP
 #define KR_2_1_9 LGUI(KC_RBRC)
-#define KR_2_1_10 KC_ENTER
+#define KR_2_1_10 KC_BSPC
 
 
 #define KR_2_2_1 KC_TAB
@@ -130,7 +130,7 @@
 #define KR_2_2_7 KC_LEFT
 #define KR_2_2_8 KC_DOWN
 #define KR_2_2_9 KC_RGHT
-#define KR_2_2_10 KC_BSPC
+#define KR_2_2_10 KC_ENTER
 
 
 #define KR_2_3_1 KC_NO
@@ -168,7 +168,7 @@
 #define KR_3_1_7 KC_7
 #define KR_3_1_8 KC_8
 #define KR_3_1_9 KC_9
-#define KR_3_1_10 KC_ENTER
+#define KR_3_1_10 KC_BSPC
 
 
 #define KR_3_2_1 KC_TAB
@@ -181,7 +181,7 @@
 #define KR_3_2_7 KC_4
 #define KR_3_2_8 KC_5
 #define KR_3_2_9 KC_6
-#define KR_3_2_10 KC_BSPC
+#define KR_3_2_10 KC_ENTER
 
 
 #define KR_3_3_1 KC_NO

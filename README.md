@@ -2,7 +2,7 @@
 
 With this [QMK](https://beta.docs.qmk.fm) keymap I try to accomplish a couple of things:
 
-- Keep qwerty my main layout for now
+- Keep qwerty my main layout for now (experimenting with P on right pinky finger now)
 - Only use 36 keys
 - Minimal number of layers for usability
 - Mods on every layer ([home row mods](https://precondition.github.io/home-row-mods) except for SHIFT)
