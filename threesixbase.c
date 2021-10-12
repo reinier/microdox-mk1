@@ -318,12 +318,15 @@ void cmdexl_reset(qk_tap_dance_state_t *state, void *user_data) {
 	}
 }
 
-// CTRL EXL
+// ALT @ &
 
 void altamp_finished(qk_tap_dance_state_t *state, void *user_data) {
 	td_state = cur_dance(state);
 	switch (td_state) {
 		case TD_SINGLE_TAP:
+			register_code16(LSFT(KC_2));
+			break;
+		case TD_DOUBLE_TAP:
 			register_code16(KC_AMPR);
 			break;
 		case TD_SINGLE_HOLD:
@@ -337,6 +340,9 @@ void altamp_finished(qk_tap_dance_state_t *state, void *user_data) {
 void altamp_reset(qk_tap_dance_state_t *state, void *user_data) {
 	switch (td_state) {
 		case TD_SINGLE_TAP:
+			unregister_code16(LSFT(KC_2));
+			break;
+		case TD_DOUBLE_TAP:
 			unregister_code16(KC_AMPR);
 			break;
 		case TD_SINGLE_HOLD:
@@ -542,7 +548,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 //
 #define KR_1_1_6 KC_NO
 #define KR_1_1_7 KC_UNDS
-#define KR_1_1_8 LSFT(KC_2)
+#define KR_1_1_8 KC_NO
 #define KR_1_1_9 KC_TILD
 #define KR_1_1_10 KC_BSPC
 
