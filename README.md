@@ -22,3 +22,6 @@ The keyboard:
 ## TODO's
 - Find good use for the MEH key
 - Add media keys (layer 5?)
+- Move layer switches to left thumb cluster to more easily use momentary switching. 
+- Spacebar should stay left on MO(1)
+- Or split layer switches and keep OSL(1) on right side so space can be a single key
