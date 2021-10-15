@@ -23,5 +23,5 @@ The keyboard:
 ## TODO's
 - Add media keys (layer 5?)
 - Redefine A (to @ on layer 1 for example) and P (to ; on layer 1 for example) keys on layers 1 … 4
-- Remap mouse keys on the left home row and determine how to do mods on mouse layer
-- Remap `()` and `[]` again, because the tap dance is not intuitive enough
+- Remap mouse keys on the left home row and determine how to do mods on mouse layer (move mods one row lower on right hand? Crazy tap dance on spacebar?)
+- Remap `()` and `[]` again (to J, K, M and `,`), because the tap dance is not intuitive enough
