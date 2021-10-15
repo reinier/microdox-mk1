@@ -23,7 +23,8 @@ enum td_keycodes {
   ALT_AMP,
   CMD_LPRN,
   SFT_RPRN,
-  ALT_COLN
+  ALT_COLN,
+  THE_THUMB
 };
 
 typedef enum {
@@ -45,6 +46,12 @@ typedef struct {
 
 // Create a global instance of the tapdance state type
 static td_state_t td_state;
+
+// Initialize tap structure associated with example tap dance key
+static td_tap_t thethumb_tap_state = {
+	.is_press_action = true,
+	.state = TD_NONE
+};
 
 // Declare your tapdance functions:
 
@@ -78,6 +85,9 @@ void sftrprn_reset(qk_tap_dance_state_t *state, void *user_data);
 
 void altcoln_finished(qk_tap_dance_state_t *state, void *user_data);
 void altcoln_reset(qk_tap_dance_state_t *state, void *user_data);
+
+void thethumb_finished(qk_tap_dance_state_t *state, void *user_data);
+void thethumb_reset(qk_tap_dance_state_t *state, void *user_data);
 
 
 /* Return an integer that corresponds to what kind of tap dance should be executed.
@@ -430,6 +440,69 @@ void altcoln_reset(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
+// THE THUMB
+
+// Functions that control what our tap dance key does
+void thethumb_finished(qk_tap_dance_state_t *state, void *user_data) {
+	thethumb_tap_state.state = cur_dance(state);
+	switch (thethumb_tap_state.state) {
+		case TD_SINGLE_TAP:
+			// Check to see if the layer is already set
+			if (layer_state_is(2)) {
+				// If already set, then switch it off
+				layer_off(2);
+			} else {
+				// If not already set, then switch the layer on
+				layer_on(2);
+			}
+			break;
+		case TD_SINGLE_HOLD:
+			layer_on(2);
+			break;
+		case TD_DOUBLE_TAP:
+			// Check to see if the layer is already set
+			if (layer_state_is(3)) {
+				// If already set, then switch it off
+				layer_off(3);
+			} else {
+				// If not already set, then switch the layer on
+				layer_on(3);
+			}
+			break;
+		case TD_DOUBLE_HOLD:
+			layer_on(3);
+			break;
+		case TD_TRIPLE_TAP:
+		// Check to see if the layer is already set
+		if (layer_state_is(4)) {
+			// If already set, then switch it off
+			layer_off(4);
+		} else {
+			// If not already set, then switch the layer on
+			layer_on(4);
+		}
+		break;
+		case TD_TRIPLE_HOLD:
+			layer_on(4);
+			break;
+		default:
+			break;
+	}
+}
+
+void thethumb_reset(qk_tap_dance_state_t *state, void *user_data) {
+	// If the key was held down and now is released then switch off the layer
+	if (thethumb_tap_state.state == TD_SINGLE_HOLD) {
+		layer_off(2);
+	} else if (thethumb_tap_state.state == TD_DOUBLE_HOLD) {
+		layer_off(3);
+	} else if (thethumb_tap_state.state == TD_TRIPLE_HOLD) {
+		layer_off(4);
+	}
+	thethumb_tap_state.state = TD_NONE;
+}
+
+
 // Define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
 qk_tap_dance_action_t tap_dance_actions[] = {
   [DOT_EL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dotel_finished, dotel_reset),
@@ -441,6 +514,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [CMD_LPRN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, cmdlprn_finished, cmdlprn_reset),
   [SFT_RPRN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, sftrprn_finished, sftrprn_reset),
   [ALT_COLN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, altcoln_finished, altcoln_reset),
+  [THE_THUMB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, thethumb_finished, thethumb_reset, 275),
 };
 
 
@@ -501,9 +575,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 // Thumb cluster
 
-#define KR_0_4_1 TT(3)
+#define KR_0_4_1 KC_ENTER
 #define KR_0_4_2 KC_SPACE
-#define KR_0_4_3 TT(2)
+#define KR_0_4_3 TD(THE_THUMB)
 
 #define KR_0_4_4 KC_TAB
 #define KR_0_4_5 OSL(1)
@@ -553,11 +627,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KR_1_3_10 KC_BSLASH
 
 
-#define KR_1_4_1 TT(3)
-#define KR_1_4_2 TT(4)
-#define KR_1_4_3 TT(2)
+#define KR_1_4_1 KC_ENTER
+#define KR_1_4_2 KC_SPACE
+#define KR_1_4_3 TD(THE_THUMB)
 
-#define KR_1_4_4 HYPR_T(KC_TAB)
+#define KR_1_4_4 KC_TAB
 #define KR_1_4_5 TT(1)
 #define KR_1_4_6 TO(0)
 
@@ -604,9 +678,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KR_2_3_10 KC_NO
 
 
-#define KR_2_4_1 TT(3)
+#define KR_2_4_1 KC_ENTER
 #define KR_2_4_2 KC_SPACE
-#define KR_2_4_3 TT(2)
+#define KR_2_4_3 TD(THE_THUMB)
 
 #define KR_2_4_4 KC_TAB
 #define KR_2_4_5 TT(1)
@@ -655,9 +729,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KR_3_3_10 KC_SLSH
 
 
-#define KR_3_4_1 TT(3)
+#define KR_3_4_1 KC_ENTER
 #define KR_3_4_2 KC_SPACE
-#define KR_3_4_3 TT(2)
+#define KR_3_4_3 TD(THE_THUMB)
 
 #define KR_3_4_4 KC_TAB
 #define KR_3_4_5 TT(1)
@@ -668,7 +742,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KR_4_1_1 KC_ESC
 #define KR_4_1_2 KC_NO
 #define KR_4_1_3 KC_NO
-#define KR_4_1_4 KC_NO
+#define KR_4_1_4 KC_MS_BTN2
 #define KR_4_1_5 KC_NO
 //
 #define KR_4_1_6 KC_MS_WH_DOWN
@@ -682,7 +756,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KR_4_2_2 KC_LALT
 #define KR_4_2_3 KC_LSHIFT
 #define KR_4_2_4 KC_LGUI
-#define KR_4_2_5 KC_NO
+#define KR_4_2_5 KC_MS_BTN1
 //
 #define KR_4_2_6 KC_MS_WH_UP
 #define KR_4_2_7 KC_MS_LEFT
@@ -704,10 +778,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KR_4_3_10 KC_NO
 
 
-#define KR_4_4_1 KC_NO
-#define KR_4_4_2 KC_MS_BTN1
-#define KR_4_4_3 KC_MS_BTN2
+#define KR_4_4_1 KC_ENTER
+#define KR_4_4_2 KC_SPACE
+#define KR_4_4_3 TD(THE_THUMB)
 //
-#define KR_4_4_4 KC_NO
-#define KR_4_4_5 KC_NO
+#define KR_4_4_4 KC_TAB
+#define KR_4_4_5 TT(1)
 #define KR_4_4_6 TO(0)
