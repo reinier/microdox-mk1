@@ -2,14 +2,14 @@
 
 With this [QMK](https://beta.docs.qmk.fm) keymap I try to accomplish a couple of things:
 
-- Keep qwerty my main layout for now (experimenting with P on right pinky finger)
+- Keep qwerty my main layout for now, except for P at right pinky
 - Only use 36 keys
 - Minimal number of layers for usability
 - All layers available on thumb cluster
 - Mods on every layer ([home row mods](https://precondition.github.io/home-row-mods), layers 2 and 3 left hand only)
 - Easy sync between my [Microdox](https://boardsource.xyz/store/5f2e7e4a2902de7151494f92) and [Moonlander](https://www.zsa.io/moonlander/) ([my Moonlander keymap](https://github.com/reinier/moonlander-mk1)) by adding an extra mapping in `definekeys.c`
 - Minimize pinky use on both sides for ergonomic reasons
-- I can always press the Hyper key to make sure I'm on layer 1
+- I can always press the Hyper key to make sure I'm on layer 0
 - Tab and space should be clear of tap dances to have a pleasurable typing experience
 
 The keymap:
@@ -22,6 +22,5 @@ The keyboard:
 
 ## TODO's
 - Add media keys (layer 5?)
-- Redefine A (to @ on layer 1 for example) and P (to ; on layer 1 for example) keys on layers 1 … 4
+- Redefine A keys on layers 2 … 4
 - Remap mouse keys on the left home row and determine how to do mods on mouse layer (move mods one row lower on right hand? Crazy tap dance on spacebar?)
-- Remap `()` and `[]` again (to J, K, M and `,`), because the tap dance is not intuitive enough
