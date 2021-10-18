@@ -24,7 +24,7 @@ The keyboard:
 - Add media keys (layer 5?)
 - Redefine A keys on layers 2 … 4
   - Right mouse on P?
-  - Left mouse on Tab thumb key?
+  - Left mouse on mid right thumb key?
 - Move `:` for layer 1 and 3 to same key on `P`? Move `!` to `L` and `;` to `.` and `=` to `G`
 - Move CAPS to A on layer 2? (doesn't work with MOD)
 - NAV home row left hand: open apps with F keys? (use hammerspoon? - Chrome, Slack, Safari, Craft, Omnifocus - Use tapdances to combine Chrome and Safari for example)
